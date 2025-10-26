@@ -1,5 +1,5 @@
 error: invalid infostring for frontmatter
-  --> $DIR/dot-in-infostring-leading.rs:1:4
+  --> $DIR/infostring-dot-leading.rs:1:4
    |
 LL | ---.toml
    |    ^^^^^
