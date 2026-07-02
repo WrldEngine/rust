@@ -608,6 +608,8 @@ impl<'tcx> Stable<'tcx> for mir::UnOp {
         match self {
             UnOp::Not => crate::mir::UnOp::Not,
             UnOp::Neg => crate::mir::UnOp::Neg,
+            UnOp::Inc => crate::mir::UnOp::Inc,
+            UnOp::Dec => crate::mir::UnOp::Dec,
             UnOp::PtrMetadata => crate::mir::UnOp::PtrMetadata,
         }
     }

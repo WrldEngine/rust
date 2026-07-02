@@ -643,6 +643,14 @@ impl<'tcx> ThirBuildCx<'tcx> {
                 }
             }
 
+            hir::ExprKind::Unary(hir::UnOp::Inc, arg) => {
+                ExprKind::Unary { op: UnOp::Inc, arg: self.mirror_expr(arg) }
+            }
+
+            hir::ExprKind::Unary(hir::UnOp::Dec, arg) => {
+                ExprKind::Unary { op: UnOp::Dec, arg: self.mirror_expr(arg) }
+            }
+
             hir::ExprKind::Struct(qpath, fields, ref base) => match expr_ty.kind() {
                 ty::Adt(adt, args) => match adt.adt_kind() {
                     AdtKind::Struct | AdtKind::Union => {

@@ -166,8 +166,10 @@ pub enum ExprPrecedence {
     Product,
     // as
     Cast,
-    // unary - * ! & &mut
+    // unary pre - * ! & &mut
     Prefix,
+    // unary post - x++ x--
+    Postfix,
     // paths, loops, function calls, array indexing, field expressions, method calls
     Unambiguous,
 }

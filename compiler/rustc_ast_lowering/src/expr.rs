@@ -531,6 +531,8 @@ impl<'hir> LoweringContext<'_, 'hir> {
             UnOp::Deref => hir::UnOp::Deref,
             UnOp::Not => hir::UnOp::Not,
             UnOp::Neg => hir::UnOp::Neg,
+            UnOp::Inc => hir::UnOp::Inc,
+            UnOp::Dec => hir::UnOp::Dec,
         }
     }
 

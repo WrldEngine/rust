@@ -1170,6 +1170,10 @@ pub enum UnOp {
     Not,
     /// The `-` operator for negation
     Neg,
+    /// The `++` operator for increment
+    Inc,
+    /// The `--` operator for decrement
+    Dec,
 }
 
 impl UnOp {
@@ -1178,6 +1182,8 @@ impl UnOp {
             UnOp::Deref => "*",
             UnOp::Not => "!",
             UnOp::Neg => "-",
+            UnOp::Inc => "++",
+            UnOp::Dec => "--",
         }
     }
 

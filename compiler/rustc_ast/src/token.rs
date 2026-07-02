@@ -443,6 +443,10 @@ pub enum TokenKind {
     ShlEq,
     // `>>=`
     ShrEq,
+    // `++`
+    PlusPlus,
+    // `--`
+    MinusMinus,
 
     /* Structural symbols */
     /// `@`
@@ -649,7 +653,7 @@ impl Token {
         match self.kind {
             Eq | Lt | Le | EqEq | Ne | Ge | Gt | AndAnd | OrOr | Bang | Tilde | Plus | Minus
             | Star | Slash | Percent | Caret | And | Or | Shl | Shr | PlusEq | MinusEq | StarEq
-            | SlashEq | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | At | Dot | DotDot
+            | SlashEq | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | PlusPlus | MinusMinus | At | Dot | DotDot
             | DotDotDot | DotDotEq | Comma | Semi | Colon | PathSep | RArrow | LArrow
             | FatArrow | Pound | Dollar | Question | SingleQuote => true,
 
@@ -714,6 +718,8 @@ impl Token {
             DotDotDot |                          // range pattern (future compat)
             PathSep |                            // path
             Lt |                                 // path (UFCS constant)
+            PlusPlus |                           // Inc
+            MinusMinus |                         // Dec
             Shl => true,                         // path (double UFCS)
             Or => matches!(pat_kind, PatWithOr), // leading vert `|` or-pattern
             OpenInvisible(InvisibleOrigin::MetaVar(
@@ -1017,10 +1023,12 @@ impl Token {
             (Bang, _) => return None,
 
             (Plus, Eq) => PlusEq,
+            (Plus, Plus) => PlusPlus,
             (Plus, _) => return None,
 
             (Minus, Eq) => MinusEq,
             (Minus, Gt) => RArrow,
+            (Minus, Minus) => MinusMinus,
             (Minus, _) => return None,
 
             (Star, Eq) => StarEq,
@@ -1067,7 +1075,7 @@ impl Token {
 
             (
                 Le | EqEq | Ne | Ge | AndAnd | OrOr | Tilde | PlusEq | MinusEq | StarEq | SlashEq
-                | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | At | DotDotDot | DotDotEq
+                | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | PlusPlus | MinusMinus | At | DotDotDot | DotDotEq
                 | Comma | Semi | PathSep | RArrow | LArrow | FatArrow | Pound | Dollar | Question
                 | OpenParen | CloseParen | OpenBrace | CloseBrace | OpenBracket | CloseBracket
                 | OpenInvisible(_) | CloseInvisible(_) | Literal(..) | Ident(..) | NtIdent(..)

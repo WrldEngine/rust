@@ -1047,6 +1047,8 @@ pub trait PrintState<'a>: std::ops::Deref<Target = pp::Printer> + std::ops::Dere
             token::OrEq => "|=".into(),
             token::ShlEq => "<<=".into(),
             token::ShrEq => ">>=".into(),
+            token::PlusPlus => "++".into(),
+            token::MinusMinus => "--".into(),
 
             /* Structural symbols */
             token::At => "@".into(),

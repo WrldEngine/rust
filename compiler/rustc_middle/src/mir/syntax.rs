@@ -1598,6 +1598,10 @@ pub enum UnOp {
     Not,
     /// The `-` operator for negation
     Neg,
+    /// The `++` operator
+    Inc,
+    /// The `--` operator
+    Dec,
     /// Gets the metadata `M` from a `*const`/`*mut`/`&`/`&mut` to
     /// `impl Pointee<Metadata = M>`.
     ///

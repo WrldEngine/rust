@@ -1246,6 +1246,14 @@ impl<'a, 'tcx> Visitor<'tcx> for TypeChecker<'a, 'tcx> {
                             ty::Int(..) | ty::Uint(..) | ty::Bool
                         );
                     }
+                    UnOp::Inc => {
+                        check_kinds!(a, "Cannot negate type {:?}", ty::Int(..) | ty::Float(..) | ty::Uint(..))
+                    }
+
+                    UnOp::Dec => {
+                        check_kinds!(a, "Cannot negate type {:?}", ty::Int(..) | ty::Float(..) | ty::Uint(..))
+                    }
+
                     UnOp::PtrMetadata => {
                         check_kinds!(
                             a,

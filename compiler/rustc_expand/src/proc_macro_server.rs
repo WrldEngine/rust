@@ -214,6 +214,8 @@ impl FromInternal<TokenStream> for Vec<TokenTree<TokenStream, Span, Symbol>> {
                 OrEq => op("|="),
                 ShlEq => op("<<="),
                 ShrEq => op(">>="),
+                PlusPlus => op("++"),
+                MinusMinus => op("--"),
                 At => op("@"),
                 Dot => op("."),
                 DotDot => op(".."),
