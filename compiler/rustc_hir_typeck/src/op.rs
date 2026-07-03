@@ -1206,6 +1206,7 @@ fn lang_item_for_unop(tcx: TyCtxt<'_>, op: hir::UnOp) -> (Symbol, Option<hir::de
         hir::UnOp::Not => (sym::not, lang.not_trait()),
         hir::UnOp::Neg => (sym::neg, lang.neg_trait()),
         hir::UnOp::Deref => bug!("Deref is not overloadable"),
+        hir::UnOp::Inc | hir::UnOp::Dec => todo!(),
     }
 }
 

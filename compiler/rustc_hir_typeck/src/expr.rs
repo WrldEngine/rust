@@ -412,7 +412,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     ) -> Ty<'tcx> {
         let tcx = self.tcx;
         let expected_inner = match unop {
-            hir::UnOp::Not | hir::UnOp::Neg => expected,
+            hir::UnOp::Not | hir::UnOp::Neg | hir::UnOp::Inc | hir::UnOp::Dec => expected,
             hir::UnOp::Deref => NoExpectation,
         };
         let oprnd_t = self.check_expr_with_expectation(oprnd, expected_inner);
@@ -438,6 +438,16 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 if oprnd_t.is_integral() || *oprnd_t.kind() == ty::Bool { oprnd_t } else { result }
             }
             hir::UnOp::Neg => {
+                let result = self.check_user_unop(expr, oprnd_t, unop, expected_inner);
+                // If it's builtin, we can reuse the type, this helps inference.
+                if oprnd_t.is_numeric() { oprnd_t } else { result }
+            }
+            hir::UnOp::Inc => {
+                let result = self.check_user_unop(expr, oprnd_t, unop, expected_inner);
+                // If it's builtin, we can reuse the type, this helps inference.
+                if oprnd_t.is_numeric() { oprnd_t } else { result }
+            }
+            hir::UnOp::Dec => {
                 let result = self.check_user_unop(expr, oprnd_t, unop, expected_inner);
                 // If it's builtin, we can reuse the type, this helps inference.
                 if oprnd_t.is_numeric() { oprnd_t } else { result }

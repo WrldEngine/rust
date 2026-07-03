@@ -44,7 +44,7 @@ pub fn binop_right_homogeneous(op: mir::BinOp) -> bool {
 #[inline]
 pub fn unop_homogeneous(op: mir::UnOp) -> bool {
     match op {
-        mir::UnOp::Not | mir::UnOp::Neg => true,
+        mir::UnOp::Not | mir::UnOp::Neg | mir::UnOp::Inc | mir::UnOp::Dec => true,
         mir::UnOp::PtrMetadata => false,
     }
 }

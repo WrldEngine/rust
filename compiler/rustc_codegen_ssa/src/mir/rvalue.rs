@@ -639,6 +639,24 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
                         };
                         (OperandValue::Immediate(llval), operand.layout)
                     }
+                    mir::UnOp::Inc => {
+                        let llval = if is_float {
+                            bx.fadd_fast(operand.immediate(), bx.const_usize(1))
+                        } else {
+                            bx.add(operand.immediate(), bx.const_usize(1))
+                        };
+
+                        (OperandValue::Immediate(llval), operand.layout)
+                    }
+                    mir::UnOp::Dec => {
+                        let llval = if is_float {
+                            bx.fsub_fast(operand.immediate(), bx.const_usize(1))
+                        } else {
+                            bx.sub(operand.immediate(), bx.const_usize(1))
+                        };
+
+                        (OperandValue::Immediate(llval), operand.layout)
+                    }
                     mir::UnOp::PtrMetadata => {
                         assert!(operand.layout.ty.is_raw_ptr() || operand.layout.ty.is_ref(),);
                         let (_, meta) = operand.val.pointer_parts();

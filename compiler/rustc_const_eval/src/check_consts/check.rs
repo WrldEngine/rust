@@ -662,6 +662,9 @@ impl<'tcx> Visitor<'tcx> for Checker<'_, 'tcx> {
                             );
                         }
                     }
+                    UnOp::Dec | UnOp::Inc => {
+                        // Because can be implemented the trait for the structure
+                    }
                     UnOp::PtrMetadata => {
                         // Getting the metadata from a pointer is always const.
                         // We already validated the type is valid in the validator.
