@@ -653,9 +653,11 @@ impl Token {
         match self.kind {
             Eq | Lt | Le | EqEq | Ne | Ge | Gt | AndAnd | OrOr | Bang | Tilde | Plus | Minus
             | Star | Slash | Percent | Caret | And | Or | Shl | Shr | PlusEq | MinusEq | StarEq
-            | SlashEq | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | PlusPlus | MinusMinus | At | Dot | DotDot
-            | DotDotDot | DotDotEq | Comma | Semi | Colon | PathSep | RArrow | LArrow
-            | FatArrow | Pound | Dollar | Question | SingleQuote => true,
+            | SlashEq | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | PlusPlus
+            | MinusMinus | At | Dot | DotDot | DotDotDot | DotDotEq | Comma | Semi | Colon
+            | PathSep | RArrow | LArrow | FatArrow | Pound | Dollar | Question | SingleQuote => {
+                true
+            }
 
             OpenParen | CloseParen | OpenBrace | CloseBrace | OpenBracket | CloseBracket
             | OpenInvisible(_) | CloseInvisible(_) | Literal(..) | DocComment(..) | Ident(..)
@@ -1075,11 +1077,11 @@ impl Token {
 
             (
                 Le | EqEq | Ne | Ge | AndAnd | OrOr | Tilde | PlusEq | MinusEq | StarEq | SlashEq
-                | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | PlusPlus | MinusMinus | At | DotDotDot | DotDotEq
-                | Comma | Semi | PathSep | RArrow | LArrow | FatArrow | Pound | Dollar | Question
-                | OpenParen | CloseParen | OpenBrace | CloseBrace | OpenBracket | CloseBracket
-                | OpenInvisible(_) | CloseInvisible(_) | Literal(..) | Ident(..) | NtIdent(..)
-                | Lifetime(..) | NtLifetime(..) | DocComment(..) | Eof,
+                | PercentEq | CaretEq | AndEq | OrEq | ShlEq | ShrEq | PlusPlus | MinusMinus | At
+                | DotDotDot | DotDotEq | Comma | Semi | PathSep | RArrow | LArrow | FatArrow
+                | Pound | Dollar | Question | OpenParen | CloseParen | OpenBrace | CloseBrace
+                | OpenBracket | CloseBracket | OpenInvisible(_) | CloseInvisible(_) | Literal(..)
+                | Ident(..) | NtIdent(..) | Lifetime(..) | NtLifetime(..) | DocComment(..) | Eof,
                 _,
             ) => {
                 return None;
